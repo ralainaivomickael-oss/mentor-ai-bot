@@ -15,14 +15,14 @@ const DATABASE_URL = process.env.DATABASE_URL;
 
 const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
 const model = genAI.getGenerativeModel({ 
-    model: "gemini-2.0-flash",
+    model: "gemini-2.5-flash",
     generationConfig: {
         maxOutputTokens: 150,  // Limite la taille de la réponse
         temperature: 0.7        // Plus rapide
     }
 });
 const visionModel = genAI.getGenerativeModel({ 
-    model: "gemini-2.0-flash",
+    model: "gemini-2.5-flash",
     generationConfig: {
         maxOutputTokens: 150
     }
