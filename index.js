@@ -86,14 +86,25 @@ async function getOrCreateProfile(phone) {
 }
 
 async function updateProfile(phone, updates) {
+    delete updates.last_interaction;
+    
     const fields = Object.keys(updates);
     const values = Object.values(updates);
-    const setClause = fields.map((f, i) => `${f} = $${i + 1}`).join(', ');
-    await pool.query(
-        `UPDATE user_profiles SET ${setClause}, last_interaction = CURRENT_TIMESTAMP WHERE phone = $${fields.length + 1}`,
-        [...values, phone]
-    );
+    
+    if (fields.length === 0) {
+        await pool.query(
+            `UPDATE user_profiles SET last_interaction = CURRENT_TIMESTAMP WHERE phone = $1`,
+            [phone]
+        );
+    } else {
+        const setClause = fields.map((f, i) => `${f} = $${i + 1}`).join(', ');
+        await pool.query(
+            `UPDATE user_profiles SET ${setClause}, last_interaction = CURRENT_TIMESTAMP WHERE phone = $${fields.length + 1}`,
+            [...values, phone]
+        );
+    }
 }
+
 
 function getSystemPrompt(profile, isExercise = false) {
     const basePrompt = `Tu es MentorAI, expert en IA générative et création de prompts.
