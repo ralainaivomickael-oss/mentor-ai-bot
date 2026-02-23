@@ -129,8 +129,6 @@ Profil apprenant:
 - Streak: ${profile.streak_days || 0} jours
 - Exercices: ${profile.total_exercises || 0}
 
-Mission : Tu analyses images (code, graphiques, interfaces) et guides pédagogiquement.
-
 ${isExercise ? 'Donne UN exercice concret 5-10 min maximum. Structure: 🎯 Titre, 📋 3 étapes max, 💡 1 conseil.' : 'Sois encourageant, précis, concis. Maximum 3-4 phrases.'}`;
 
 
@@ -274,7 +272,6 @@ app.post('/whatsapp', async (req, res) => {
         const newStreak = calculateStreak(profile.last_interaction, profile.streak_days);
         await updateProfile(from, { 
             streak_days: newStreak,
-            last_interaction: new Date()
         });
 
         twiml.message(response);
