@@ -261,8 +261,8 @@ app.post('/whatsapp', async (req, res) => {
 app.get('/health', (req, res) => {
     res.json({ status: 'OK' });
 });
-application.obtenir('/', (demande, res) => {
-    res.envoyer('MentorAI fonctionne ✅');
+app.get('/', (req, res) => {
+    res.send('MentorAI fonctionne ✅');
 });
 
 const PORT = process.env.PORT || 10000;
