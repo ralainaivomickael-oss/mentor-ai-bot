@@ -17,8 +17,8 @@ const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
 const model = genAI.getGenerativeModel({ 
     model: "gemini-2.0-flash",
     generationConfig: {
-        maxOutputTokens: 150,  // Limite la taille de la réponse
-        temperature: 0.7        // Plus rapide
+        maxOutputTokens: 150,
+        temperature: 0.7
     }
 });
 const visionModel = genAI.getGenerativeModel({ 
@@ -27,7 +27,6 @@ const visionModel = genAI.getGenerativeModel({
         maxOutputTokens: 150
     }
 });
-
 
 const pool = new Pool({
     connectionString: DATABASE_URL,
@@ -117,9 +116,9 @@ async function updateProfile(phone, updates) {
     }
 }
 
-
+// --- FONCTION CORRIGÉE ICI ---
 function getSystemPrompt(profile, isExercise = false) {
-    const basePrompt = `Tu es MentorAI, expert en IA générative et création de prompts.
+    return `Tu es MentorAI, expert en IA générative et création de prompts.
 
 RÈGLE IMPORTANTE : Réponds en maximum 3-4 phrases courtes. Sois concis et direct.
 
@@ -129,14 +128,11 @@ Profil apprenant:
 - Streak: ${profile.streak_days || 0} jours
 - Exercices: ${profile.total_exercises || 0}
 
-${isExercise ? 'Donne UN exercice concret 5-10 min maximum. Structure: 🎯 Titre, 📋 3 étapes max, 💡 1 conseil.' : 'Sois encourageant, précis, concis. Maximum 3-4 phrases.'}`;
+Tu analyses aussi les images (code, graphiques, interfaces) et guides pédagogiquement si une image est fournie.
 
-
-Tu analyses images (code, graphiques, interfaces) et guides pédagogiquement.
-
-${isExercise ? 'Donne exercice concret 5-10 min avec structure: 🎯 Titre, 📋 Instructions, 💡 Conseil, ✅ Validation' : 'Sois encourageant, précis, donne des exemples concrets.'}`;
-
-    return basePrompt;
+${isExercise 
+    ? 'Donne UN exercice concret 5-10 min maximum. Structure: 🎯 Titre, 📋 3 étapes max, 💡 1 conseil.' 
+    : 'Sois encourageant, précis, concis. Maximum 3-4 phrases.'}`;
 }
 
 async function analyzeImage(base64Image, mimeType = 'image/jpeg') {
@@ -299,4 +295,3 @@ initDatabase().then(() => {
         console.log(`🚀 MentorAI démarré sur port ${PORT}`);
     });
 });
-
