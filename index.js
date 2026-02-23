@@ -14,8 +14,8 @@ const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 const DATABASE_URL = process.env.DATABASE_URL;
 
 const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
-const visionModel = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+const visionModel = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
 const pool = new Pool({
     connectionString: DATABASE_URL,
@@ -271,6 +271,9 @@ app.post('/whatsapp', async (req, res) => {
 
 app.get('/health', (req, res) => {
     res.json({ status: 'OK' });
+});
+app.get('/', (req, res) => {
+    res.send('MentorAI fonctionne ✅');
 });
 
 const PORT = process.env.PORT || 10000;
