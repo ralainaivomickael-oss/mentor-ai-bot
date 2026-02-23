@@ -129,7 +129,7 @@ Profil apprenant:
 - Streak: ${profile.streak_days || 0} jours
 - Exercices: ${profile.total_exercises || 0}
 
-Tu analyses images (code, graphiques, interfaces) et guides pédagogiquement.
+Mission : Tu analyses images (code, graphiques, interfaces) et guides pédagogiquement.
 
 ${isExercise ? 'Donne UN exercice concret 5-10 min maximum. Structure: 🎯 Titre, 📋 3 étapes max, 💡 1 conseil.' : 'Sois encourageant, précis, concis. Maximum 3-4 phrases.'}`;
 
